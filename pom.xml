@@ -7,14 +7,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.6</version>
+        <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>io.joshuasalcedo</groupId>
     <artifactId>fx</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <description>AtlantaFX starter</description>
-    <url>https://github.com/mkpaz/atlantafx-starter</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,13 +22,13 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <java.version>21</java.version>
-        <javafx.version>22</javafx.version>
+        <java.version>24</java.version>
+        <javafx.version>24</javafx.version>
 
         <app.name>AtlantaFX Starter</app.name>
         <app.version>${project.version}</app.version>
-        <app.moduleName>starter</app.moduleName>
-        <app.mainClass>io.joshuasalcedo.fx.Launcher</app.mainClass>
+        <app.moduleName>Desktop Application</app.moduleName>
+        <app.mainClass>io.joshuasalcedo.desktop.Launcher</app.mainClass>
 
         <lib.atlantafx.version>2.0.1</lib.atlantafx.version>
         <lib.ikonli.version>12.3.1</lib.ikonli.version>
@@ -141,7 +140,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.14.0</version>
                 <configuration>
                     <release>${java.version}</release>
                 </configuration>

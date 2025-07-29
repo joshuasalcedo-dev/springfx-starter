@@ -1,4 +1,4 @@
-package io.joshuasalcedo.fx;
+package io.joshuasalcedo.desktop;
 
 import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
