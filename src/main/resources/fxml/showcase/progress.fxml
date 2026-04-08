@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="8" xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="io.joshuasalcedo.desktop.controller.showcase.ProgressSectionController">
+    <Label fx:id="sectionTitle" styleClass="showcase-section-title"
+           style="-fx-font-size: 15px; -fx-font-weight: 600;"/>
+    <VBox fx:id="demoBox" styleClass="showcase-demo"
+          style="-fx-background-color: -color-bg-inset; -fx-background-radius: 4; -fx-border-color: -color-border-muted; -fx-border-radius: 4;">
+        <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+    </VBox>
+    <HBox alignment="CENTER_LEFT">
+        <ToggleButton fx:id="codeToggle" text="Show Code" onAction="#toggleCode" style="-fx-font-size: 11px;"/>
+    </HBox>
+    <VBox fx:id="codeBox"/>
+</VBox>

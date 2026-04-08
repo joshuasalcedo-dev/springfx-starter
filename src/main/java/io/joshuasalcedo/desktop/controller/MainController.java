@@ -12,9 +12,11 @@ import org.kordamp.ikonli.feather.Feather;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Component
 public class MainController {
@@ -22,9 +24,11 @@ public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     private final FxmlViewManager viewManager;
+    private final Environment environment;
 
-    public MainController(FxmlViewManager viewManager) {
+    public MainController(FxmlViewManager viewManager, Environment environment) {
         this.viewManager = viewManager;
+        this.environment = environment;
     }
 
     @FXML
@@ -156,12 +160,21 @@ public class MainController {
     @FXML
     private Label statusRightLabel;
 
+    @FXML
+    private HBox navShowcaseItem;
+
+    @FXML
+    private Label navShowcaseItemIcon;
+
+    @FXML
+    private Label navShowcaseItemLabel;
 
     @FXML
     public void initialize() {
         logger.debug("MainController initialized");
 
         initIcons();
+        initShowcase();
         navBottomItem.setOnMouseClicked(event -> openSettings());
     }
 
@@ -174,6 +187,24 @@ public class MainController {
         setIcon(navSecondary1Icon, Feather.USERS, 16);
         setIcon(navSecondary2Icon, Feather.ARCHIVE, 16);
         setIcon(navBottomItemIcon, Feather.SETTINGS, 16);
+        setIcon(navShowcaseItemIcon, Feather.EYE, 16);
+    }
+
+    private void initShowcase() {
+        boolean isDev = Arrays.asList(environment.getActiveProfiles()).contains("dev");
+        navShowcaseItem.setVisible(isDev);
+        navShowcaseItem.setManaged(isDev);
+        if (isDev) {
+            navShowcaseItem.setOnMouseClicked(event -> loadShowcase());
+        }
+    }
+
+    private void loadShowcase() {
+        try {
+            contentPane.getChildren().setAll(viewManager.loadView("/fxml/showcase.fxml"));
+        } catch (IOException e) {
+            logger.error("Failed to load showcase", e);
+        }
     }
 
     private void setIcon(Label label, Feather icon, int size) {

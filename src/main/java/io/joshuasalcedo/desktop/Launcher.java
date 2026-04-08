@@ -34,9 +34,22 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class Launcher extends Application {
 
     private static final Logger logger = LoggerFactory.getLogger(Launcher.class);
-    private static final Path CRASH_LOG = Path.of(
-            System.getProperty("user.home"), "AtlantaFX-Starter", "logs", "crash.log"
-    );
+    private static final Path APP_HOME;
+    private static final Path CRASH_LOG;
+
+    static {
+        // Read app.dir from Maven-filtered application.properties before Spring starts
+        String appDir;
+        try (var in = Launcher.class.getResourceAsStream("/application.properties")) {
+            var props = new Properties();
+            if (in != null) props.load(in);
+            appDir = props.getProperty("app.dir", "atlantafx-starter");
+        } catch (IOException e) {
+            appDir = "atlantafx-starter";
+        }
+        APP_HOME = Path.of(System.getProperty("user.home"), appDir);
+        CRASH_LOG = APP_HOME.resolve("logs/crash.log");
+    }
 
     private ConfigurableApplicationContext applicationContext;
 
@@ -44,6 +57,14 @@ public class Launcher extends Application {
         // Global crash handler — catches errors that occur before logback initializes
         Thread.setDefaultUncaughtExceptionHandler((thread, throwable) ->
                 writeCrashLog("Uncaught exception in thread " + thread.getName(), throwable));
+
+        try {
+            // Ensure app directories exist before Spring Boot starts
+            Files.createDirectories(APP_HOME.resolve("data"));
+            Files.createDirectories(APP_HOME.resolve("logs"));
+        } catch (IOException e) {
+            writeCrashLog("Failed to create app directories", e);
+        }
 
         try {
             Application.launch(Launcher.class, args);

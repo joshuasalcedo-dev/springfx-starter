@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <!-- Log directory: ~/AtlantaFX-Starter/logs -->
-    <property name="LOG_DIR" value="${user.home}/AtlantaFX-Starter/logs" />
+    <!-- Log directory: ~/${app.dir}/logs — app.dir is set as a system property -->
+    <springProperty name="APP_DIR" source="app.dir" defaultValue="atlantafx-starter"/>
+    <property name="LOG_DIR" value="${user.home}/${APP_DIR}/logs" />
     <property name="LOG_FILE" value="${LOG_DIR}/app.log" />
 
     <!-- ═══════════════════════════════════════════ -->

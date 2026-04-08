@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true" styleClass="content-scroll">
+    <VBox spacing="24">
+        <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+        <!-- Header -->
+        <VBox spacing="4">
+            <padding><Insets bottom="8"/></padding>
+            <Label text="Component Showcase" style="-fx-font-size: 18px; -fx-font-weight: 600;"/>
+            <Label text="Live demos of built-in JavaFX + AtlantaFX components. Dev profile only."
+                   style="-fx-font-size: 12px; -fx-text-fill: -color-fg-muted;"/>
+        </VBox>
+
+        <fx:include source="showcase/buttons.fxml"/>
+        <fx:include source="showcase/inputs.fxml"/>
+        <fx:include source="showcase/combo.fxml"/>
+        <fx:include source="showcase/toggle.fxml"/>
+        <fx:include source="showcase/progress.fxml"/>
+        <fx:include source="showcase/typography.fxml"/>
+        <fx:include source="showcase/icons.fxml"/>
+        <fx:include source="showcase/notifications.fxml"/>
+        <fx:include source="showcase/slider.fxml"/>
+        <fx:include source="showcase/list.fxml"/>
+        <fx:include source="showcase/table.fxml"/>
+        <fx:include source="showcase/webview.fxml"/>
+    </VBox>
+</ScrollPane>

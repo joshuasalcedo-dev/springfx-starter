@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="8" xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="io.joshuasalcedo.desktop.controller.showcase.IconsSectionController">
+
+    <Label fx:id="sectionTitle" styleClass="showcase-section-title"
+           style="-fx-font-size: 15px; -fx-font-weight: 600;"/>
+
+    <VBox fx:id="demoBox" spacing="12"
+          style="-fx-background-color: -color-bg-inset; -fx-background-radius: 4; -fx-border-color: -color-border-muted; -fx-border-radius: 4;">
+        <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+
+        <!-- Search + Filter bar -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <TextField fx:id="searchField" promptText="Search icons..." prefWidth="250"/>
+            <ComboBox fx:id="packFilter" prefWidth="200"/>
+            <Label fx:id="countLabel" style="-fx-font-size: 11px; -fx-text-fill: -color-fg-muted;"/>
+        </HBox>
+
+        <!-- Icon grid -->
+        <ScrollPane fitToWidth="true" prefHeight="360" style="-fx-background-color: transparent;">
+            <FlowPane fx:id="iconsGrid" hgap="6" vgap="6"/>
+        </ScrollPane>
+
+        <!-- Pagination -->
+        <HBox fx:id="paginationBox" spacing="8" alignment="CENTER">
+            <Button fx:id="prevBtn" text="Previous" onAction="#prevPage"/>
+            <Label fx:id="pageLabel" style="-fx-font-size: 12px;"/>
+            <Button fx:id="nextBtn" text="Next" onAction="#nextPage"/>
+        </HBox>
+    </VBox>
+
+    <HBox alignment="CENTER_LEFT">
+        <ToggleButton fx:id="codeToggle" text="Show Code" onAction="#toggleCode" style="-fx-font-size: 11px;"/>
+    </HBox>
+    <VBox fx:id="codeBox"/>
+</VBox>

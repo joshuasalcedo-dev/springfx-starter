@@ -26,8 +26,9 @@
         <javafx.version>25</javafx.version>
         <javafx.platform>win</javafx.platform>
 
-        <app.name>AtlantaFX Starter</app.name>
+        <app.name>atlantafx-starter</app.name>
         <app.version>${project.version}</app.version>
+        <app.dir>${app.name}</app.dir>
         <app.moduleName>Desktop Application</app.moduleName>
         <app.mainClass>io.joshuasalcedo.desktop.Launcher</app.mainClass>
 
@@ -291,6 +292,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!-- webflux available if needed, but web server is disabled by default -->
+        <!-- see spring.main.web-application-type=none in application.properties -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
@@ -302,13 +305,17 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>${lib.sqlite-jdbc.version}</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-community-dialects</artifactId>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -556,6 +563,85 @@
                             <winDirChooser>true</winDirChooser>
                             <winPerUserInstall>true</winPerUserInstall>
                             <winMenuGroup>${app.name}</winMenuGroup>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>jpackage</id>
+                                <goals>
+                                    <goal>jpackage</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--
+            TIER 2c: jpackage DEB installer (Linux/Debian)
+
+            Usage:  mvn clean package -Pinstaller-deb -Djavafx.platform=linux -DskipTests
+            Output: target/installer/*.deb
+
+            Prerequisites:
+              - JDK 25+ with jpackage
+              - fakeroot and dpkg-deb on PATH (apt install fakeroot)
+        -->
+        <profile>
+            <id>installer-deb</id>
+            <properties>
+                <linux.shortcut>true</linux.shortcut>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>stage-jar</id>
+                                <phase>package</phase>
+                                <goals><goal>run</goal></goals>
+                                <configuration>
+                                    <target>
+                                        <mkdir dir="${project.build.directory}/jpackage-input"/>
+                                        <copy file="${project.build.directory}/${project.build.finalName}.jar"
+                                              todir="${project.build.directory}/jpackage-input"/>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.panteleyev</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>1.7.2</version>
+                        <configuration>
+                            <name>${app.name}</name>
+                            <appVersion>${app.version}</appVersion>
+                            <vendor>Joshua Salcedo</vendor>
+                            <description>${project.description}</description>
+                            <destination>${project.build.directory}/installer</destination>
+                            <type>DEB</type>
+
+                            <input>${project.build.directory}/jpackage-input</input>
+                            <mainJar>${project.build.finalName}.jar</mainJar>
+                            <mainClass>org.springframework.boot.loader.launch.PropertiesLauncher</mainClass>
+
+                            <javaOptions>
+                                <option>--add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED</option>
+                                <option>--add-opens=javafx.base/com.sun.javafx.runtime=ALL-UNNAMED</option>
+                                <option>--add-opens=javafx.controls/javafx.scene.control.skin=ALL-UNNAMED</option>
+                                <option>-Xms128m</option>
+                                <option>-Xmx512m</option>
+                            </javaOptions>
+
+                            <!-- To add a custom icon, place app-icon.png in src/main/packaging/ -->
+                            <!-- <icon>${project.basedir}/src/main/packaging/app-icon.png</icon> -->
+                            <linuxShortcut>${linux.shortcut}</linuxShortcut>
+                            <linuxMenuGroup>Development</linuxMenuGroup>
+                            <linuxDebMaintainer>joshuasalcedo@example.com</linuxDebMaintainer>
                         </configuration>
                         <executions>
                             <execution>
