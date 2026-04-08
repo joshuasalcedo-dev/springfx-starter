@@ -1,0 +1,282 @@
+/*
+ * Desktop Application Design System — JavaFX + AtlantaFX Overrides
+ * Load AFTER the AtlantaFX base theme (e.g., Dracula, CupertinoDark, etc.)
+ *
+ * Principles: dense, efficient, system-native, muted palette
+ */
+
+/* ============================================================
+   COLOR TOKENS
+   ============================================================ */
+.root {
+    /* Backgrounds — never pure white */
+    -color-bg-default: #f8f8f8;
+    -color-bg-subtle: #f0f0f0;
+    -color-bg-muted: #e8e8e8;
+    -color-bg-inset: #ffffff;
+
+    /* Surfaces (panels, cards, sidebar) */
+    -color-surface-sidebar: #f0f0f2;
+    -color-surface-card: #ffffff;
+    -color-surface-hover: rgba(0, 0, 0, 0.04);
+    -color-surface-active: rgba(0, 0, 0, 0.08);
+
+    /* Text — never pure black */
+    -color-fg-default: #1a1a1a;
+    -color-fg-muted: #6b6b6b;
+    -color-fg-subtle: #999999;
+
+    /* Borders */
+    -color-border-default: #e0e0e0;
+    -color-border-muted: #ebebeb;
+
+    /* Accent — slightly desaturated */
+    -color-accent-default: #4a7dfc;
+    -color-accent-hover: #3d6ce0;
+    -color-accent-muted: rgba(74, 125, 252, 0.12);
+
+    /* Status colors — slightly muted */
+    -color-success: #3d9a50;
+    -color-warning: #d4930d;
+    -color-danger: #d1393e;
+    -color-info: #4a7dfc;
+
+    /* Border radius tokens */
+    -radius-sm: 3px;
+    -radius-md: 4px;
+    -radius-lg: 6px;
+}
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+.root {
+    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: -color-bg-default;
+}
+
+/* Monospaced contexts (code, logs, terminal) */
+.mono, .code, .log-view {
+    -fx-font-family: "Cascadia Code", "JetBrains Mono", "Consolas", "SF Mono", monospace;
+    -fx-font-size: 12px;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.button {
+    -fx-padding: 4px 12px;
+    -fx-min-height: 28px;
+    -fx-pref-height: 28px;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.button.sm {
+    -fx-padding: 2px 8px;
+    -fx-min-height: 24px;
+    -fx-pref-height: 24px;
+    -fx-font-size: 12px;
+}
+
+/* ============================================================
+   TEXT INPUTS
+   ============================================================ */
+.text-field, .text-area, .combo-box {
+    -fx-padding: 4px 8px;
+    -fx-min-height: 28px;
+    -fx-pref-height: 28px;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+    -fx-background-color: -color-surface-sidebar;
+    -fx-border-color: transparent -color-border-default transparent transparent;
+    -fx-border-width: 0 1 0 0;
+}
+
+/* ============================================================
+   NAV ITEMS
+   ============================================================ */
+.nav-item {
+    -fx-cursor: hand;
+    -fx-background-radius: 4px;
+}
+
+.nav-item:hover {
+    -fx-background-color: -color-surface-hover;
+}
+
+.nav-item.active {
+    -fx-background-color: -color-accent-muted;
+}
+
+.nav-item-icon {
+    -fx-font-size: 15px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-min-width: 18px;
+    -fx-alignment: center;
+}
+
+.nav-item-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-fg-default;
+}
+
+.nav-section-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-subtle;
+    -fx-font-weight: 600;
+}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.top-bar {
+    -fx-background-color: -color-bg-default;
+}
+
+.page-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -color-fg-default;
+}
+
+.top-bar-action-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-cursor: hand;
+}
+
+/* ============================================================
+   BRANDING
+   ============================================================ */
+.app-icon {
+    -fx-font-size: 18px;
+    -fx-text-fill: -color-accent-default;
+}
+
+.app-name {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -color-fg-default;
+}
+
+/* ============================================================
+   RIGHT PANEL
+   ============================================================ */
+.right-panel {
+    -fx-background-color: -color-surface-card;
+    -fx-border-color: transparent transparent transparent -color-border-default;
+    -fx-border-width: 0 0 0 1;
+}
+
+.right-panel-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -color-fg-default;
+}
+
+.right-panel-close {
+    -fx-cursor: hand;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 14px;
+}
+
+.right-panel-close:hover {
+    -fx-text-fill: -color-fg-default;
+}
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+.content-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.content-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.content-pane {
+    -fx-background-color: transparent;
+}
+
+/* ============================================================
+   STATUS BAR
+   ============================================================ */
+.status-bar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+}
+
+.status-text {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.status-progress {
+    -fx-pref-height: 12px;
+    -fx-accent: -color-accent-default;
+}
+
+/* ============================================================
+   TABLE VIEW
+   ============================================================ */
+.table-view .table-row-cell {
+    -fx-cell-size: 30px;
+    -fx-font-size: 13px;
+}
+
+.table-view .column-header {
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+}
+
+/* ============================================================
+   SEPARATORS
+   ============================================================ */
+.separator .line {
+    -fx-border-color: -color-border-muted;
+    -fx-border-width: 0.5 0 0 0;
+}
+
+/* ============================================================
+   CONTEXT MENUS
+   ============================================================ */
+.context-menu {
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);
+}
+
+.menu-item {
+    -fx-padding: 4px 12px 4px 8px;
+}
+
+/* ============================================================
+   WELCOME / DEMO (preserved from original)
+   ============================================================ */
+.welcome {
+    -fx-spacing: 20px;
+    -fx-padding: 50px;
+    -fx-alignment: center;
+}
+
+.welcome .ikonli-font-icon {
+    -fx-icon-size: 64px;
+}
+
+.welcome .label {
+    -fx-wrap-text: true;
+    -fx-pref-width: 450px;
+    -fx-text-alignment: center;
+}

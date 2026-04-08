@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="io.joshuasalcedo.desktop.controller.MainController"
+            styleClass="root-pane"
+            prefWidth="1200" prefHeight="800">
+
+<!-- ======================== SIDEBAR (LEFT) ======================== -->
+    <left>
+        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="220">
+            <padding><Insets top="12" right="8" bottom="12" left="8"/></padding>
+
+            <!-- App branding: icon + name -->
+            <HBox fx:id="brandingBox" styleClass="branding-box" alignment="CENTER_LEFT" spacing="8">
+                <padding><Insets bottom="8" left="8"/></padding>
+                <Label fx:id="appIconLabel" styleClass="app-icon" text="[icon]"/>
+                <Label fx:id="appNameLabel" styleClass="app-name" text="App Name"/>
+            </HBox>
+
+            <Separator/>
+
+            <!-- Primary nav items -->
+            <VBox fx:id="navButtonContainer" styleClass="nav-section" spacing="2">
+                <padding><Insets top="8" bottom="8"/></padding>
+
+                <HBox fx:id="navItem1" styleClass="nav-item" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="6" right="8" bottom="6" left="8"/></padding>
+                    <Label fx:id="navItem1Icon" styleClass="nav-item-icon" text="○"/>
+                    <Label fx:id="navItem1Label" styleClass="nav-item-label" text="Nav Item 1"/>
+                </HBox>
+                <HBox fx:id="navItem2" styleClass="nav-item" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="6" right="8" bottom="6" left="8"/></padding>
+                    <Label fx:id="navItem2Icon" styleClass="nav-item-icon" text="○"/>
+                    <Label fx:id="navItem2Label" styleClass="nav-item-label" text="Nav Item 2"/>
+                </HBox>
+                <HBox fx:id="navItem3" styleClass="nav-item" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="6" right="8" bottom="6" left="8"/></padding>
+                    <Label fx:id="navItem3Icon" styleClass="nav-item-icon" text="○"/>
+                    <Label fx:id="navItem3Label" styleClass="nav-item-label" text="Nav Item 3"/>
+                </HBox>
+                <HBox fx:id="navItem4" styleClass="nav-item" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="6" right="8" bottom="6" left="8"/></padding>
+                    <Label fx:id="navItem4Icon" styleClass="nav-item-icon" text="○"/>
+                    <Label fx:id="navItem4Label" styleClass="nav-item-label" text="Nav Item 4"/>
+                </HBox>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Secondary nav items -->
+            <VBox fx:id="secondaryNavContainer" styleClass="nav-section" spacing="2">
+                <padding><Insets top="8" bottom="8"/></padding>
+                <Label fx:id="secondarySectionLabel" styleClass="nav-section-label" text="Section">
+                    <padding><Insets left="8" bottom="4"/></padding>
+                </Label>
+                <HBox fx:id="navSecondary1" styleClass="nav-item" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="6" right="8" bottom="6" left="8"/></padding>
+                    <Label fx:id="navSecondary1Icon" styleClass="nav-item-icon" text="○"/>
+                    <Label fx:id="navSecondary1Label" styleClass="nav-item-label" text="Secondary 1"/>
+                </HBox>
+                <HBox fx:id="navSecondary2" styleClass="nav-item" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="6" right="8" bottom="6" left="8"/></padding>
+                    <Label fx:id="navSecondary2Icon" styleClass="nav-item-icon" text="○"/>
+                    <Label fx:id="navSecondary2Label" styleClass="nav-item-label" text="Secondary 2"/>
+                </HBox>
+            </VBox>
+
+            <!-- Spacer pushes bottom section down -->
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Separator/>
+
+            <!-- Bottom nav item -->
+            <VBox fx:id="bottomSection" styleClass="nav-section" spacing="2">
+                <padding><Insets top="8"/></padding>
+                <HBox fx:id="navBottomItem" styleClass="nav-item" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="6" right="8" bottom="6" left="8"/></padding>
+                    <Label fx:id="navBottomItemIcon" styleClass="nav-item-icon" text="○"/>
+                    <Label fx:id="navBottomItemLabel" styleClass="nav-item-label" text="Settings"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- ======================== MAIN CONTENT (CENTER) ======================== -->
+    <center>
+        <ScrollPane fx:id="contentScrollPane" fitToWidth="true" fitToHeight="true" styleClass="content-scroll">
+            <StackPane fx:id="contentPane" styleClass="content-pane">
+                <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+            </StackPane>
+        </ScrollPane>
+    </center>
+
+    <!-- ======================== RIGHT PANEL (COLLAPSIBLE) ======================== -->
+    <right>
+        <VBox fx:id="rightPanel" styleClass="right-panel" prefWidth="300"
+              visible="false" managed="false">
+            <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+
+            <HBox fx:id="rightPanelHeader" styleClass="right-panel-header" alignment="CENTER_LEFT" spacing="8">
+                <Label fx:id="rightPanelTitle" styleClass="right-panel-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="rightPanelClose" styleClass="right-panel-close" text="✕"/>
+            </HBox>
+
+            <Separator/>
+
+            <ScrollPane fx:id="rightPanelScrollPane" fitToWidth="true" fitToHeight="true"
+                        VBox.vgrow="ALWAYS" styleClass="content-scroll">
+                <StackPane fx:id="rightPanelContent" styleClass="right-panel-content">
+                    <padding><Insets top="12" right="4" bottom="12" left="4"/></padding>
+                </StackPane>
+            </ScrollPane>
+        </VBox>
+    </right>
+
+    <!-- ======================== STATUS BAR (BOTTOM) ======================== -->
+    <bottom>
+        <HBox fx:id="statusBar" styleClass="status-bar" alignment="CENTER_LEFT" spacing="12" prefHeight="28">
+            <padding><Insets top="4" right="12" bottom="4" left="12"/></padding>
+            <Label fx:id="statusLabel" styleClass="status-text" text="Ready"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ProgressBar fx:id="statusProgressBar" styleClass="status-progress"
+                         prefWidth="150" prefHeight="14" visible="false"/>
+            <Label fx:id="statusProgressLabel" styleClass="status-text" visible="false"/>
+            <Separator orientation="VERTICAL" prefHeight="16"/>
+            <Label fx:id="statusRightLabel" styleClass="status-text" text="v0.1.0"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
